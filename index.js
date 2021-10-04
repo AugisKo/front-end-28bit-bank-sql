@@ -23,6 +23,9 @@ app.init = async () => {
     console.log(jonas);
     console.log(sonata);
 
+    const petrasBalance1 = await Account.balance(conn, petras.accountNumber);
+    console.log(petrasBalance1);
+
     const petroSaskaita1 = await Account.create(conn, petras.id);
     const sonatosSaskaita2 = await Account.create(conn, sonata.id);
 
@@ -36,6 +39,26 @@ app.init = async () => {
     console.log(petroDeposit1);
     console.log(sonatosDeposit1);
     console.log(sonatosDeposit2);
+
+    const sonatosWithdraw1 = await Account.withdraw(conn, sonata.accountNumber, 500);
+    const sonatosWithdraw2 = await Account.withdraw(conn, sonata.accountNumber, 1500);
+
+    console.log(sonatosWithdraw1);
+    console.log(sonatosWithdraw2);
+
+    const sonatosTransfer1 = await Account.transfer(conn, sonata.accountNumber, maryte.accountNumber, 200);
+
+    console.log(sonatosTransfer1);
+
+    const jonoDelete = await User.delete(conn, jonas.id);
+    const sonatosDelete = await User.delete(conn, sonata.id);
+
+    console.log(jonoDelete);
+    console.log(sonatosDelete);
+
+    const sonatosTransfer2 = await Account.transfer(conn, sonata.accountNumber, jonas.accountNumber, 50);
+
+    console.log(sonatosTransfer2);
 }
 
 app.init();
